@@ -16,10 +16,10 @@ $(document).ready(function() {
 	
 		 $("#sparklinehome").sparkline([ [1,4,1], [2,3,2], [3,2,2], [4,1,1], [6,4,4], [3,5,1], [6,4,1], [2,3,4], [5,5,3], [3,3,2], [1,4,1], [2,3,2], [3,2,2], [4,1,1], [6,4,3], [3,5,1], [1,4,1], [2,3,2], [3,2,2], [4,1,1], [6,4,6], [1,4,1], [2,3,2], [3,2,2], [4,1,1], [6,4,4], [3,5,1], [6,4,1], [2,3,4], [5,5,3], [3,3,2], [1,4,1], [1,4,1], [2,3,2], [3,2,2], [4,1,1], [6,4,4], [3,5,1], [6,4,1], [2,3,4], [5,5,3], [3,3,2], [1,4,1] ], {
 				type: 'bar',
-				height: '432px',
+				height: '355px',
 				barWidth: 7,
 				barSpacing: 10,
-				stackedBarColor: ['#805bbe','#2eb7f3','#24caa1']
+				stackedBarColor: ['#ff7f5a','#3f4d9f','#24caa1']
 			});
 
         $('#sparkline2').sparkline([20, 40, 30], {
@@ -98,11 +98,11 @@ $(document).ready(function() {
             type: 'line',
             width: '100%',
             height: '50',
-            lineColor: '#24caa1',
-            fillColor: '#24caa1',
-            maxSpotColor: '#24caa1',
+            lineColor: '#99d683',
+            fillColor: '#99d683',
+            maxSpotColor: '#99d683',
             highlightLineColor: 'rgba(0, 0, 0, 0.2)',
-            highlightSpotColor: '#24caa1'
+            highlightSpotColor: '#99d683'
         });
         $("#sparkline9").sparkline([0,2,8,6,8,5,6,4,8,6,6,2 ], {
             type: 'line',
@@ -231,7 +231,7 @@ $(document).ready(function() {
             barWidth: '4',
             resize: true,
             barSpacing: '5',
-            barColor: '#eb4b4b'
+            barColor: '#fb9678'
         });
         
    
