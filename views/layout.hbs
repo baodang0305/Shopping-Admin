@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>{{title}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -55,6 +55,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="modernizr-2.8.3.min.js"></script>
+    <script type="text/javascript" src="client.js"></script>
   </head>
   <body>
 
@@ -78,13 +79,7 @@
 								               <i class="fa big-icon fa-home icon-wrap"></i>
 								               <span class="mini-click-non">Quản lý sản phầm</span>
 								            </a>
-                            <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Product List" href="product-list"><i class="fa fa-female sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Danh Sách Sản Phẩm</span></a></li>
-                                <li><a title="Product Edit" href="product-edit"><i class="fa fa-bolt sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Cập Nhật Sản Phẩm</span></a></li>
-                                <li><a title="Product Detail" href="product-detail"><i class="fa fa-heart-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Chi Tiết Sản Phẩm</span></a></li>
-                                <li><a title="Product Cart" href="product-cart"><i class="fa fa-level-down sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Product Cart</span></a></li>
-                                <li><a title="Product Payment" href="product-payment"><i class="fa fa-location-arrow sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Product Payment</span></a></li>
-                            </ul>
+
                         </li>
                         <li>
                             <a class="has-arrow" href="" aria-expanded="false">
@@ -92,8 +87,8 @@
                               <span class="mini-click-non">Quản lý nhà cung ứng</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                              <li><a title="Product List" href="product-list"><i class="fa fa-female sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Danh Sách Nhà Cung Ứng</span></a></li>
-                              <li><a title="Product Edit" href="product-edit"><i class="fa fa-bolt sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Cập Nhật Nhà Cung Ứng</span></a></li>
+                              <li><a title="Manufacturer List" href="manufacturer-list"><i class="fa fa-female sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Danh Sách Nhà Cung Ứng</span></a></li>
+                              <li><a title="Manufacturer Edit" href="manufacturer-create"><i class="fa fa-bolt sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Cập Nhật Nhà Cung Ứng</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -102,7 +97,7 @@
                               <span class="mini-click-non">Quản lý đơn đặt hàng</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                              <li><a title="Product List" href="product-list"><i class="fa fa-female sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Danh Sách Đơn Đặt Hàng</span></a></li>
+                              <li><a title="Product List" href="order-list"><i class="fa fa-female sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Danh Sách Đơn Đặt Hàng</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -110,10 +105,7 @@
                               <i class="fa big-icon fa-flask icon-wrap"></i>
                               <span class="mini-click-non">Quản lý loại sản phẩm</span>
                             </a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                              <li><a title="Product List" href="product-list"><i class="fa fa-female sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Danh Sách Loại Sản Phẩm</span></a></li>
-                              <li><a title="Product Edit" href="product-edit"><i class="fa fa-bolt sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Cập Nhật Loại Sản Phẩm</span></a></li>
-                            </ul>
+                            
                         </li>
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">

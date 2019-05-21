@@ -3,24 +3,35 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./controllers/index');
 var productListRouter = require('./controllers/product/product-list');
 var productDetailRouter = require('./controllers/product/product-detail');
 var productEditRouter = require('./controllers/product/product-edit');
 var accountRouter = require('./controllers/customer/customer');
+var manufacturerRouter = require('./controllers/manufacturer/manufacturer');
+var orderRouter = require('./controllers/order/order')
 
 var app = express();
 
 // view engine setup
-app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'views/product'), path.join(__dirname, 'views/customer')]);
+app.set('views', [
+  path.join(__dirname, 'views'),
+  path.join(__dirname, 'views/product'),
+  path.join(__dirname, 'views/customer'),
+  path.join(__dirname, 'views/manufacturer'),
+  path.join(__dirname, 'views/order')
+]);
+
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'public/images/blog-details')));
 app.use(express.static(path.join(__dirname, 'public/images/contact')));
@@ -91,11 +102,13 @@ app.use(express.static(path.join(__dirname, 'public/javascripts/wizard')));
 
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 
-app.use('/',indexRouter);
-app.use('/',productListRouter);
-app.use('/',productDetailRouter);
-app.use('/',productEditRouter);
-app.use('/',accountRouter);
+app.use('/', indexRouter);
+app.use('/', productListRouter);
+app.use('/', productDetailRouter);
+app.use('/', productEditRouter);
+app.use('/', accountRouter);
+app.use('/', manufacturerRouter);
+app.use('/', orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
