@@ -33,12 +33,12 @@ router.post('/edit', function(req, res, next){
       const collectionProduct = client.db("shoppingdb").collection("Product");
       var product_edit = {
         Name: req.body.Name,
-        Category: req.body.Category, 
+        Category: req.body.Category,
         Gender: req.body.Gender,
-        Cost: req.body.Cost, 
-        Discount: req.body.Discount, 
+        Cost: req.body.Cost,
+        Discount: req.body.Discount,
         Amount: req.body.Amount,
-        Describe: req.body.Describe, 
+        Describe: req.body.Describe,
         Product_Group: req.body.Product_Group
       };
       collectionProduct.updateOne({"_id": object_id},{$set: product_edit}, function(err, res){
@@ -46,7 +46,7 @@ router.post('/edit', function(req, res, next){
           console.log(err);
         }
         else{
-          
+
           console.log("product is Updated ");
         }
       });

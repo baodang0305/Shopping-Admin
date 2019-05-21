@@ -45,23 +45,19 @@ class Creater {
         return array
   }
 
-  createOrder() {
+  createOrder(productArray, sum) {
     var array = []
-    for (var i = 0; i < 5; i++) {
     names3.map(name => array.push(({
-        Name: name,
-        Address: "Địa chỉ của " + name,
-        PhoneNumber: Math.floor(Math.random() * 1000000).toString(),
         Description: "Không",
-        CustomerId: name + i,
+        CustomerId: "id cua" + name,
         OrderDate: GetCurrentDate(),
-        ProductId: "product 1",
-        ReceiverPhonenumber: "3432543",
-        ReceiverAddress: "Đống Đa, Hà Nội",
-        ReceiverName: name
+        Products: productArray,
+        ReceiverPhonenumber: Math.floor(Math.random() * 1000000).toString(),
+        ReceiverAddress: "Địa chỉ của " + name,
+        ReceiverName: name,
+        Sum: sum
     })))
-  }
-        return array
+  return array
   }
 };
 

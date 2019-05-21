@@ -13,11 +13,10 @@ router.get('/manufacturer-edit-:id', function(req, res, next) {
 });
 
 router.post('/commit:id', function(req, res, next){
-  var body = req.body;
-  var name = body.name;
-  var address = body.address;
-  var phone = body.phone;
-  var des = body.des;
+  var name = req.body.name;
+  var address = req.body.address;
+  var phone = req.body.phone;
+  var des = req.body.des;
 
   var id = req.params.id
   if (id != null) {

@@ -7,15 +7,13 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="review-tab-pro-inner">
                         <ul id="myTab3" class="tab-review-design">
-                            <li class="active"><a href="#description"><i class="fa fa-pencil" aria-hidden="true"></i> Manufacturer Edit</a></li>
-                            <li><a href="#reviews"><i class="fa fa-file-image-o" aria-hidden="true"></i> Pictures</a></li>
-                            <li><a href="#INFORMATION"><i class="fa fa-commenting" aria-hidden="true"></i> Review</a></li>
+                            <li class="active"><a href="#description"><i class="fa fa-pencil" aria-hidden="true"></i>Chi tiết đơn đặt hàng</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <div class="product-tab-list tab-pane fade active in" id="description">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <form action="/commit{{object_id}}" method="post">
+                                        <form action="/order-commit{{object_id}}" method="post">
                                         <div class="review-content-section">
                                             <div class="input-group mg-b-pro-edt">
                                                 <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -29,33 +27,22 @@
                                                 <span class="input-group-addon"><i class="fa fa-sticky-note-o" aria-hidden="true"></i></span>
                                                 <input type="text" class="form-control" placeholder="Số điện thoại" id="phone" name="phone">
                                             </div>
-                                            <div class="input-group mg-b-pro-edt">
-                                                <span class="input-group-addon"><i class="fa fa-qrcode" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" placeholder="Mô tả" id="des" name="des">
-                                            </div>
                                         </div>
                                       </div>
                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="product-status-wrap">
-                                            <h4>Product List</h4>
+                                            <h4>Danh sách sản phẩm trong đơn hàng</h4>
                                             <table>
                                                 <tr>
                                                     <th>Tên sản phầm</th>
-                                                    <th>Màu</th>
-                                                    <th>Cỡ</th>
-                                                    <th>Số lượng</th>
                                                     <th>Giá</th>
-                                                    <th>Xoá</th>
+                                                    <th>Số lượng</th>
                                                 </tr>
-                                                {{#each listOrder}}
+                                                {{#each listProduct}}
                                                 <tr>
-                                                    <td>{{this.ReceiverName}}</td>
-                                                    <td>{{this.Address}}</td>
-                                                    <td>{{this.ReceiverPhonenumber}}</td>
-                                                    <td>{{this.OrderDate}}</td>
-                                                    <td>
-                                                      <form action="/order-trash-{{this._id}}" method="POST"><button data-toggle="tooltip" title="Trash" class="pd-setting-ed" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button></form>
-                                                    </td>
+                                                    <td>{{this.product.Name}}</td>
+                                                    <td>{{this.product.Cost}}</td>
+                                                    <td>{{this.amount}}</td>
                                                 </tr>
                                                 {{/each}}
                                             </table>
@@ -73,83 +60,18 @@
                                         </div>
                                       </div>
                                   </div>
+                                </br>
                                   <div class="row">
                                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                           <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
                                               <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">Save
                                                   </button>
-                                              <form action="manufacturer-list" method="get"><button type="submit" class="btn btn-warning waves-effect waves-light">Discard
+                                              <form action="order-list" method="get"><button type="submit" class="btn btn-warning waves-effect waves-light">Discard
                                                   </button>
                                                 </form>
                                           </div>
                                       </div>
                                   </div>
-                            </div>
-                            <div class="product-tab-list tab-pane fade" id="reviews">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="review-content-section">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="pro-edt-img">
-                                                        <img src="5-small.jpg" alt="" />
-                                                    </div>
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                   <span class="input-group-addon"> <input type="file" name="Image" id="file"></span>
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Name}}" name="Name" id="Name">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Category}}" name="Category">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Gender}}" name="Gender">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Amount}}" name="Amount">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Cost}}" name="Cost">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Discount}}" name="Discount">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-ticket" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Product_Group}}" name="Product_Group">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{productid.Describe}}" name="Describe">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
-                                                <input type="submit" value="Lưu Thông Tin" class="btn btn-primary waves-effect waves-light m-r-10">
-
-                                                <button type="button" class="btn btn-warning waves-effect waves-light">Discard
-                                                    </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>

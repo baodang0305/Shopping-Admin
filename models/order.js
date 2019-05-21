@@ -10,10 +10,11 @@ const orderSchema = new Schema({
       type: Date,
       required: true
     },
-    ProductId: {
-      type: String,
-      required: true
-    },
+    Products: [{
+      type: Schema.Types.ObjectId,
+      amount: Number,
+      ref: 'Product'
+    }],
     ReceiverPhonenumber: {
       type: String,
       required: true
@@ -23,6 +24,14 @@ const orderSchema = new Schema({
       required: true
     },
     ReceiverName: {
+      type: String,
+      required: true
+    },
+    Sum: {
+      type: Number,
+      required: true
+    },
+    Description:  {
       type: String,
       required: true
     }

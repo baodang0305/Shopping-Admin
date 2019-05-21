@@ -10,14 +10,16 @@
                             <th>Địa chỉ người nhận</th>
                             <th>Số điện thoại người nhận</th>
                             <th>Ngày đặt</th>
+                            <th>Tổng giá tiền</th>
                             <th>Xoá sửa</th>
                         </tr>
                         {{#each listOrder}}
                         <tr>
                             <td>{{this.ReceiverName}}</td>
-                            <td>{{this.Address}}</td>
+                            <td>{{this.ReceiverAddress}}</td>
                             <td>{{this.ReceiverPhonenumber}}</td>
                             <td>{{this.OrderDate}}</td>
+                            <td>{{this.Sum}}</td>
                             <td>
                               <form action="/order-edit-{{this._id}}" method="GET"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed" type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></form>
                               <form action="/order-trash-{{this._id}}" method="POST"><button data-toggle="tooltip" title="Trash" class="pd-setting-ed" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button></form>

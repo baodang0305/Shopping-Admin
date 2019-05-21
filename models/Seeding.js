@@ -31,12 +31,26 @@ MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
   }
   else{
     console.log("Successfully connected");
-
-    //add manufacturer
     const collectionOrder = client.db("shoppingdb").collection("Order");
-    console.log(creater.createOrder())
-    collectionOrder.insert(creater.createOrder(), function(err, res){
-      console.log("order are created ")
-    });
+    const collectionProduct = client.db("shoppingdb").collection("Product");
+    let Async_Await = async()=>{
+        let array = await collectionProduct.find().toArray();
+        console.log(array)
+        let goodArray = []
+        let sum = 0
+        array.forEach(element => {
+          let amount = Math.floor(Math.random() * 10)
+          goodArray.push({
+            id: element._id,
+            amount: amount
+          })
+          sum += element.Cost*amount
+        });
+        console.log(creater.createOrder(goodArray, sum))
+        collectionOrder.insert(creater.createOrder(goodArray, sum), function(err, res){
+          console.log("order are created ")
+        });
+    }
+    Async_Await();
   }
 });
