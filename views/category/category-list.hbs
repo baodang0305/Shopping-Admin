@@ -3,36 +3,22 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap">
-                    <h4>Danh Sách Sản Phẩm</h4>
+                    <h4>Danh Sách Loại Sản Phẩm</h4>
                     <div class="add-product">
-                        <a href="product-add">Thêm Sản Phẩm</a>
+                        <a href="category-add">Thêm Loại Sản Phẩm</a>
                     </div>
                     <table>
                         <tr>
-                            <th>Hình ảnh</th>
-                            <th>Tên SP</th>
-                            <th>Thể loại</th>
-                            <th>Giới tính</th>
-                            <th>Giá góc</th>
-                            <th>Giá giảm</th>
-                            <th>Số lượng</th>
-                            <th>Nhóm SP</th>
-                            <th>Mô tả</th>
+                            <th>ID</th>
+                            <th>Tên Loại SP</th>
                         </tr>
-                        {{#each product_list}}
+                        {{#each category_list}}
                         <tr>
-                            <td><img src="{{this.Image}}" alt="" /></td>
+                            <td>{{this._id}}</td>
                             <td>{{this.Name}}</td>
-                            <td>{{this.Category}}</td>
-                            <td>{{this.Gender}}</td>
-                            <td>${{this.Cost}}</td>
-                            <td>${{this.Discount}}</td>
-                            <td>{{this.Amount}}</td>
-                            <td>{{this.Product_Group}}</td>
-                            <td>{{this.Describe}}</td>
                             <td>
-                                <a href="product-edit-{{this._id}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                <form action="/delete-product-{{this._id}}" method="POST">
+                                <a href="category-edit-{{this._id}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                <form action="/delete-category-{{this._id}}" method="POST">
                                     <button type="submit" data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </form>
                             </td>

@@ -4,23 +4,23 @@ var ObjectId = require('mongodb').ObjectId;
 const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
 
-router.get('/product-list', function(req, res, next){
+router.get('/category-list', function(req, res, next){
   MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
     if(err){
       console.log(err);
     }
     else{
-      const collectionProduct = client.db("shoppingdb").collection("Product");
+      const collectionCategory = client.db("shoppingdb").collection("Category");
       let Async_Await = async()=>{
-        let product_list = await collectionProduct.find({}).toArray();
-        res.render('product-list', {title: 'Product List', 'product_list': product_list});
+        let category_list = await collectionCategory.find({}).toArray();
+        res.render('category-list', {title: 'Category List', 'category_list': category_list});
       }
       Async_Await();
     }
   });
 });
 
-router.post('/delete-product-:id', function(req, res, next){
+router.post('/delete-category-:id', function(req, res, next){
   var id = req.params.id;
   var object_id = new ObjectId(id);
   MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
@@ -28,16 +28,16 @@ router.post('/delete-product-:id', function(req, res, next){
       console.log(err);
     }
     else{
-      const collectionProduct = client.db("shoppingdb").collection("Product");
-      collectionProduct.remove({"_id": object_id}, function(err, res){
+      const collectionCategory = client.db("shoppingdb").collection("Category");
+      collectionCategory.remove({"_id": object_id}, function(err, res){
         if(err){
           console.log(err);
         }
         else{
-          console.log("product is deleted");
+          console.log("category is deleted");
         }
       });
-      res.redirect('/product-list');
+      res.redirect('/category-list');
     }
   });
 });

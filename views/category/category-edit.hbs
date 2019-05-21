@@ -1,0 +1,52 @@
+<form action="/category-edit" method="POST">
+    <!-- Single pro tab start-->
+    <div class="single-product-tab-area mg-tb-15">
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="review-tab-pro-inner">
+                            <ul id="myTab3" class="tab-review-design">
+                                <li class="active"><a href="#description">Cập Nhật Loại Sản Phẩm</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                    <input type="text" class="form-control" placeholder="{{categoryid._id}}" name="Id">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="input-group mg-b-pro-edt">
+                                                    <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                    <input type="text" class="form-control" placeholder="{{categoryid.Name}}" name="Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
+                                                <input type="submit" value="Lưu Thông Tin" class="btn btn-primary waves-effect waves-light m-r-10">
+                                                    
+                                                <button type="button" class="btn btn-warning waves-effect waves-light">Discard
+                                                    </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

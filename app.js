@@ -6,14 +6,17 @@ var logger = require('morgan');
 
 var indexRouter = require('./controllers/index');
 var productListRouter = require('./controllers/product/product-list');
-var productDetailRouter = require('./controllers/product/product-detail');
 var productEditRouter = require('./controllers/product/product-edit');
+var productAddRouter = require('./controllers/product/product-add');
+var categoryListRouter = require('./controllers/category/category-list');
+var categoryAddRouter = require('./controllers/category/category-add');
+var categoryEditRouter = require('./controllers/category/category-edit');
 var accountRouter = require('./controllers/customer/customer');
 
 var app = express();
 
 // view engine setup
-app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'views/product'), path.join(__dirname, 'views/customer')]);
+app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'views/product'), path.join(__dirname, 'views/customer'), path.join(__dirname, 'views/category')]);
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -29,6 +32,12 @@ app.use(express.static(path.join(__dirname, 'public/images/logo')));
 app.use(express.static(path.join(__dirname, 'public/images/new-product')));
 app.use(express.static(path.join(__dirname, 'public/images/notification')));
 app.use(express.static(path.join(__dirname, 'public/images/product')));
+app.use(express.static(path.join(__dirname, 'public/images/man/tshirt')));
+app.use(express.static(path.join(__dirname, 'public/images/man/shirt')));
+app.use(express.static(path.join(__dirname, 'public/images/women/shirt')));
+app.use(express.static(path.join(__dirname, 'public/images/women/tshirt')));
+app.use(express.static(path.join(__dirname, 'public/images/fashion')));
+app.use(express.static(path.join(__dirname, 'public/images/sport')));
 
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets/c3')));
@@ -88,13 +97,15 @@ app.use(express.static(path.join(__dirname, 'public/javascripts/touchspin')));
 app.use(express.static(path.join(__dirname, 'public/javascripts/tree-line')));
 app.use(express.static(path.join(__dirname, 'public/javascripts/vendor')));
 app.use(express.static(path.join(__dirname, 'public/javascripts/wizard')));
-
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 
 app.use('/',indexRouter);
 app.use('/',productListRouter);
-app.use('/',productDetailRouter);
 app.use('/',productEditRouter);
+app.use('/',productAddRouter);
+app.use('/',categoryListRouter);
+app.use('/',categoryAddRouter);
+app.use('/',categoryEditRouter);
 app.use('/',accountRouter);
 
 // catch 404 and forward to error handler
