@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 const path = require('path');
 const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
-const product = require("../../models/product");
 var multer = require("multer");
 // const handleError = (err, res) => {
 //   res
@@ -14,9 +13,9 @@ var multer = require("multer");
 // };
 
 const storage = multer.diskStorage({
-  destination: './public/images/man/shirt',
+  destination: './public/images/product',
   filename: function(req, file, cb) {
-    cb(null, 'shirt-man-1.jpg');
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
 
@@ -36,8 +35,7 @@ router.post('/add_product', upload, function(req, res, next){
   var dis = req.body.Discount;
   var group = req.body.Product_Group;
   var des = req.body.Describe;
-
-  console.log(req.file)
+  var filename = req.file.filename;
 
   MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
     if(err){
@@ -45,8 +43,8 @@ router.post('/add_product', upload, function(req, res, next){
     }
     else{
       const collectionProduct = client.db("shoppingdb").collection("Product");
-      const pro = new product({
-        Image: 'hinhanhupload.png',
+      const pro = ({
+        Image: filename,
         Name: name,
         Category: cate,
         Gender: gender,
@@ -57,8 +55,8 @@ router.post('/add_product', upload, function(req, res, next){
         Product_Group: group
       });
       collectionProduct.insertOne(pro, function(err, res){
-        console.log("product is added ");
-      });
+        console.log('product is added')
+      })
       res.redirect('/product-list');
     }
   });

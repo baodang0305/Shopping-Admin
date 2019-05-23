@@ -41,15 +41,8 @@ app.use(express.static(path.join(__dirname, 'public/images/blog-details')));
 app.use(express.static(path.join(__dirname, 'public/images/contact')));
 app.use(express.static(path.join(__dirname, 'public/images/cropper')));
 app.use(express.static(path.join(__dirname, 'public/images/logo')));
-app.use(express.static(path.join(__dirname, 'public/images/new-product')));
 app.use(express.static(path.join(__dirname, 'public/images/notification')));
 app.use(express.static(path.join(__dirname, 'public/images/product')));
-app.use(express.static(path.join(__dirname, 'public/images/man/tshirt')));
-app.use(express.static(path.join(__dirname, 'public/images/man/shirt')));
-app.use(express.static(path.join(__dirname, 'public/images/women/shirt')));
-app.use(express.static(path.join(__dirname, 'public/images/women/tshirt')));
-app.use(express.static(path.join(__dirname, 'public/images/fashion')));
-app.use(express.static(path.join(__dirname, 'public/images/sport')));
 
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 app.use(express.static(path.join(__dirname, 'public/stylesheets/c3')));
