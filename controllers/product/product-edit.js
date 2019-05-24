@@ -25,7 +25,7 @@ router.get('/product-edit-:id', function(req,res, next){
 });
 
 router.post('/edit', function(req, res, next){
-  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
+ MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
     if(err){
       console.log(err);
     }
@@ -52,7 +52,6 @@ router.post('/edit', function(req, res, next){
       });
       res.redirect('/product-list');
     }
-  });
+  })
 });
-
 module.exports = router;
