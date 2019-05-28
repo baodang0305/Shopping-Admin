@@ -13,7 +13,6 @@ router.get('/product-list', function(req, res, next){
       const collectionProduct = client.db("shoppingdb").collection("Product");
       let Async_Await = async()=>{
         let product_list = await collectionProduct.find({}).toArray();
-        console.log(product_list)
         res.render('product-list', {title: 'Product List', 'product_list': product_list});
       }
       Async_Await();
