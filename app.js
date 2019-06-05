@@ -1,9 +1,58 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
+
+passport.use(new localStrategy(function(Username, Password, done){
+      MongoClient.connect(uri, {useNewUrlParser: true}, function(err, client){
+          if(err){
+              return done(err);
+          }
+          else{
+              const collectionAccountAdmin = client.db('shoppingdb').collection('Account-Admin');
+                collectionAccountAdmin.findOne({Username: Username}, function(err, user){
+                  if(err){
+                    return done(err);
+                  }
+                  else{
+                    if(!user){
+                      return done(null, false, {message: "Incorrect Username"});
+                    }
+                    if(!bcrypt.compareSync(Password, user.Password)){
+                      return done(null, false, {message: "Incorrect Password"});
+                    }
+                    return done(null, user)
+                  }
+                });
+          }
+      });
+}));
+
+passport.serializeUser(function(user, done){
+  done(null, user.Username);
+});
+
+passport.deserializeUser(function(Username, done) {
+  MongoClient.connect(uri, {useNewUrlParser: true}, function(err, client){
+    if(err){
+        return done(err);
+    }
+    else{
+      const collectionAccountAdmin = client.db('shoppingdb').collection('Account-Admin');
+      collectionAccountAdmin.findOne({Username: Username}, function(err, user){
+        if(err){
+          return done(err);
+        }
+        done(err, user);
+      });
+    }
+  });
+});
 
 var indexRouter = require('./controllers/index');
 var productListRouter = require('./controllers/product/product-list');
@@ -14,10 +63,10 @@ var categoryAddRouter = require('./controllers/category/category-add');
 var categoryEditRouter = require('./controllers/category/category-edit');
 var manufacturerRouter = require('./controllers/manufacturer/manufacturer');
 var orderRouter = require('./controllers/order/order');
-var loginRouter = require('./controllers/admin/login');
 var registerRouter = require('./controllers/admin/register');
 var accountListRouter = require('./controllers/customer/account_list');
 var accountDetailRouter = require('./controllers/customer/account_detail');
+var loginRouter = require('./controllers/admin/login');
 
 var app = express();
 
@@ -34,12 +83,14 @@ app.set('views', [
 
 app.set('view engine', 'hbs');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({secret: "mysecret",
+                 resave: true,
+                 saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'public/images/blog-details')));
 app.use(express.static(path.join(__dirname, 'public/images/contact')));
@@ -117,10 +168,10 @@ app.use('/',categoryAddRouter);
 app.use('/',categoryEditRouter);
 app.use('/', manufacturerRouter);
 app.use('/', orderRouter);
-app.use('/', loginRouter);
 app.use('/',registerRouter);
 app.use('/',accountListRouter);
 app.use('/',accountDetailRouter);
+app.use('/', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

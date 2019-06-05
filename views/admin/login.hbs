@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login | jeweler - Material Admin Template</title>
+    <title>Đăng Nhập</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -67,43 +67,33 @@
         <![endif]-->
 
     <div class="color-line"></div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="back-link back-backend">
-                    <a href="/" class="btn btn-primary">Back to Dashboard</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-md-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="text-center m-b-md custom-login">
-                    <h3>PLEASE LOGIN TO APP</h3>
-                    <p>This is the best app ever!</p>
+                    <h3>Vui Lòng Đăng Nhập</h3>
                 </div>
                 <div class="hpanel">
                     <div class="panel-body">
-                        <form action="#" id="loginForm">
+                        <form action="/login" id="loginForm" method="POST">
                             <div class="form-group">
-                                <label class="control-label" for="username">Username</label>
-                                <input type="text" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
-                                <span class="help-block small">Your unique username to app</span>
+                                <label class="control-label" for="username">Tên Đăng Nhập</label>
+                                <input type="text" placeholder="" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
+                                <span class="help-block small"></span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="password">Password</label>
-                                <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
-                                <span class="help-block small">Yur strong password</span>
+                                <label class="control-label" for="password">Mật Khẩu</label>
+                                <input type="password" title="Please enter your password" placeholder="" required="" value="" name="password" id="password" class="form-control">
+                                <span class="help-block small"></span>
                             </div>
-                            <div class="checkbox login-checkbox">
-                                <label>
-										<input type="checkbox" class="i-checks"> Remember me </label>
-                                <p class="help-block small">(if this is a private computer)</p>
-                            </div>
-                            <button class="btn btn-success btn-block loginbtn">Login</button>
-                            <a class="btn btn-default btn-block" href="#">Register</a>
+                           
+                            <input class="btn btn-success btn-block loginbtn" type="submit" value="Đăng Nhập">
+                            <a class="btn btn-default btn-block" href="#">Đăng Kí</a>
                         </form>
                     </div>
                 </div>
