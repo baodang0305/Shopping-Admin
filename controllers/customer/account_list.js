@@ -13,6 +13,7 @@ router.get('/account-list', function(req, res, next){
           const collectionCustomer = client.db("shoppingdb").collection("Customer");
           let Async_Await = async()=>{
             let account_list = await collectionCustomer.find({}).toArray();
+            client.close();
             res.render('account-list', {title: 'Account Customer', 'account_list': account_list });
           }
           Async_Await();

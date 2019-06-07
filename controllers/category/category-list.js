@@ -13,6 +13,7 @@ router.get('/category-list', function(req, res, next){
       const collectionCategory = client.db("shoppingdb").collection("Category");
       let Async_Await = async()=>{
         let category_list = await collectionCategory.find({}).toArray();
+        client.close();
         res.render('category-list', {title: 'Category List', 'category_list': category_list});
       }
       Async_Await();
@@ -30,6 +31,7 @@ router.post('/delete-category-:id', function(req, res, next){
     else{
       const collectionCategory = client.db("shoppingdb").collection("Category");
       collectionCategory.remove({"_id": object_id}, function(err, res){
+        client.close();
         if(err){
           console.log(err);
         }

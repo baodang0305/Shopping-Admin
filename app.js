@@ -18,6 +18,7 @@ passport.use(new localStrategy(function(Username, Password, done){
           else{
               const collectionAccountAdmin = client.db('shoppingdb').collection('Account-Admin');
                 collectionAccountAdmin.findOne({Username: Username}, function(err, user){
+                  client.close();
                   if(err){
                     return done(err);
                   }
@@ -47,6 +48,7 @@ passport.deserializeUser(function(Username, done) {
     else{
       const collectionAccountAdmin = client.db('shoppingdb').collection('Account-Admin');
       collectionAccountAdmin.findOne({Username: Username}, function(err, user){
+        client.close();
         if(err){
           return done(err);
         }

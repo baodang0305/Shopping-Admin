@@ -13,6 +13,7 @@ router.get('/product-list', function(req, res, next){
       const collectionProduct = client.db("shoppingdb").collection("Product");
       let Async_Await = async()=>{
         let product_list = await collectionProduct.find({}).toArray();
+        client.close();
         res.render('product-list', {title: 'Product List', 'product_list': product_list});
       }
       Async_Await();
@@ -34,6 +35,7 @@ router.post('/delete-product-:id', function(req, res, next){
           console.log(err);
         }
         else{
+          client.close();
           console.log("product is deleted");
         }
       });

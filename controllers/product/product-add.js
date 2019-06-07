@@ -54,6 +54,7 @@ router.post('/add_product', upload, function(req, res, next){
         Product_Group: group
       });
       collectionProduct.insertOne(pro, function(err, res){
+        client.close();
         console.log('product is added')
       })
       res.redirect('/product-list');

@@ -30,6 +30,7 @@ router.post('/commit:id', function(req, res, next){
         let Async_Await = async()=>{
           await collectionManufacturer.save({ Name: name, Address: address, PhoneNumber: phone, Description: des})
           await collectionManufacturer.remove({_id: object_id});
+          client.close();
           // let listManufacturer = await collectionManufacturer.find().toArray();
           // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
           res.redirect("/manufacturer-list")
@@ -46,6 +47,7 @@ router.post('/commit:id', function(req, res, next){
         const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
         let Async_Await = async()=>{
           await collectionManufacturer.save({ Name: name, Address: address, PhoneNumber: phone, Description: des})
+          client.close();
           // let listManufacturer = await collectionManufacturer.find().toArray();
           // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
           res.redirect("/manufacturer-list")
@@ -69,6 +71,7 @@ router.post('/commit', function(req, res, next){
       const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
       let Async_Await = async()=>{
         await collectionManufacturer.save({ Name: name, Address: address, PhoneNumber: phone, Description: des})
+        client.close();
         // let listManufacturer = await collectionManufacturer.find().toArray();
         // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
         res.redirect("/manufacturer-list")
@@ -94,6 +97,7 @@ router.post('/manufacturer-trash-:id', function(req, res, next) {
       const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
       let Async_Await = async()=>{
         await collectionManufacturer.remove({_id: object_id});
+        client.close();
         // let listManufacturer = await collectionManufacturer.find().toArray();
         // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
         res.redirect("/manufacturer-list")
@@ -114,6 +118,7 @@ router.get('/manufacturer-list', function(req, res, next) {
       let Async_Await = async()=>{
         try {
           let listManufacturer = await collectionManufacturer.find().toArray();
+          client.close();
           res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
         } catch (err) {
           res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: []});

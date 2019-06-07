@@ -34,6 +34,7 @@ router.post('/register', function(req, res, next){
                 let Asycn_Await = async()=>{
                     let acc = await collectionAccountAdmin.findOne({Username: req.body.Username});
                     if(acc){
+                        client.close();
                         res.render('register', {title: 'Đăng Kí', layout: "", 'mess': "Tên người dùng đã tồn tại"});
                     }
                     else{

@@ -15,6 +15,7 @@ router.get('/order-list', function(req, res, next) {
       let Async_Await = async()=>{
         try {
           let listOrder = await collectionOrder.find().toArray();
+          client.close();
           res.render('order-list', {title: 'Danh sách đơn đặt hàng', listOrder: listOrder});
         } catch (err) {
           res.render('order-list', {title: 'Danh sách đơn đặt hàng', listOrder: []});
@@ -50,6 +51,7 @@ router.post('/order-commit:id', function(req, res, next){
               "ReceiverPhonenumber": phone,
               "Description": des
           }})
+          client.close();
           // let listManufacturer = await collectionManufacturer.find().toArray();
           // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
           res.redirect("/order-list")
@@ -72,6 +74,7 @@ router.post('/order-trash-:id', function(req, res, next) {
       const collectionOrder = client.db("shoppingdb").collection("Order");
       let Async_Await = async()=>{
         await collectionOrder.remove({_id: object_id});
+        client.close();
         // let listManufacturer = await collectionManufacturer.find().toArray();
         // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
         res.redirect("/order-list")
@@ -93,6 +96,7 @@ router.post('/good-trash-:id', function(req, res, next) {
       const collectionOrder = client.db("shoppingdb").collection("Order");
       let Async_Await = async()=>{
         await collectionOrder.remove({_id: object_id});
+        client.close();
         // let listManufacturer = await collectionManufacturer.find().toArray();
         // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
         res.redirect("/order-list")
@@ -120,6 +124,7 @@ router.get('/order-edit-:id', function(req, res, next) {
         let flag = 0
         orderList[0].Products.forEach(element => {
             let product = collectionProduct.find({_id: element.id}).sort().toArray().then(items => {
+              client.close();
               console.log(items)
               products.push({
                 product: items[0],

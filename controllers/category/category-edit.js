@@ -16,6 +16,7 @@ router.get('/category-edit-:id', function(req,res, next){
       const collectionCategory = client.db("shoppingdb").collection("Category");
       let Async_Await = async()=>{
         let categoryid = await collectionCategory.findOne({_id: object_id});
+        client.close();
         res.render('category-edit', {title: 'Category Edit', 'categoryid': categoryid});
       }
       Async_Await();
@@ -34,6 +35,7 @@ router.post('/category-edit', function(req, res, next){
         Name: req.body.Name
       };
       collectionCategory.updateOne({"_id": object_id},{$set: category_edit}, function(err, res){
+        client.close();
         if(err){
           console.log(err);
         }

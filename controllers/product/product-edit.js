@@ -16,6 +16,7 @@ router.get('/product-edit-:id', function(req,res, next){
       const collectionProduct = client.db("shoppingdb").collection("Product");
       let Async_Await = async()=>{
         let productid = await collectionProduct.findOne({_id: object_id});
+        client.close();
         res.render('product-edit', {title: 'Product Edit', 'productid': productid});
       }
       Async_Await();
@@ -45,7 +46,7 @@ router.post('/edit', function(req, res, next){
           console.log(err);
         }
         else{
-
+          client.close();
           console.log("product is Updated ");
         }
       });

@@ -16,6 +16,7 @@ router.get('/account-detail-:id', function(req,res, next){
       const collectionCustomer = client.db("shoppingdb").collection("Customer");
       let Async_Await = async()=>{
         let customerid = await collectionCustomer.findOne({_id: object_id});
+        client.close();
         res.render('account-detail', {title: 'Account Detail', 'customerid': customerid});
       }
       Async_Await();

@@ -17,6 +17,7 @@ router.post('/add_category', function(req, res, next){
       const collectionCategory = client.db("shoppingdb").collection("Category");
       const cate = new category(req.body);
       collectionCategory.insertOne(cate, function(err, res){
+        client.close();
         console.log("category is added ");
       });
       res.redirect('/category-list');
