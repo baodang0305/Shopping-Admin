@@ -76,8 +76,13 @@
                 </div>
                 <div class="hpanel">
                     <div class="panel-body">
-                        <form action="/" method="POST" id="loginForm">
+                        <form action="/register" method="POST" id="loginForm">
                             <div class="row">
+                                {{#if mess}}
+                                  <div class="form-group col-lg-12 color-red text-center">
+                                      <input class="form-control" type="text" value="{{mess}}" readonly>
+                                  </div>
+                                {{/if}}
                                 <div class="form-group col-lg-12">
                                     <label>Tên Đăng Nhập</label>
                                     <input class="form-control" name="Username">

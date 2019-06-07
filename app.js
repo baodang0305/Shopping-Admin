@@ -1,9 +1,11 @@
 const express = require('express');
+const createError = require('http-errors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const passport = require('passport');
+const validator = require('express-validator');
 const localStrategy = require('passport-local').Strategy;
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
@@ -90,7 +92,7 @@ app.use(session({secret: "mysecret",
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(validator());
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'public/images/blog-details')));
 app.use(express.static(path.join(__dirname, 'public/images/contact')));
@@ -173,7 +175,7 @@ app.use('/',accountListRouter);
 app.use('/',accountDetailRouter);
 app.use('/', loginRouter);
 
-// catch 404 and forward to error handler
+//catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
