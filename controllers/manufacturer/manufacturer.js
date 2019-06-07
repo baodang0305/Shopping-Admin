@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ObjectId = require("mongodb").ObjectID;
 const MongoClient = require("mongodb").MongoClient;
-const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrites=true&w=majority";
 
 /* GET home page. */
 router.get('/manufacturer-edit-:id', function(req, res, next) {

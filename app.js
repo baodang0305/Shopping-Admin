@@ -8,7 +8,7 @@ const passport = require('passport');
 const validator = require('express-validator');
 const localStrategy = require('passport-local').Strategy;
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrites=true&w=majority";
 
 passport.use(new localStrategy(function(Username, Password, done){
       MongoClient.connect(uri, {useNewUrlParser: true}, function(err, client){
