@@ -254,17 +254,20 @@
                               <span class="admin-name">{{mess}}</span>
                               <i class="fa fa-angle-down adminpro-icon adminpro-down-arrow"></i>
                             </a>
-                              <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                  <li><a href="register"><span class="fa fa-home author-log-ic"></span>Đăng Kí</a>
-                                  </li>
-                                  <li><a href="login"><span class="fa fa-lock author-log-ic"></span>Đăng Nhập</a>
-                                  </li>
-                                  <li><a href="#"><span class="fa fa-user author-log-ic"></span>Thông Tin Của Tôi</a>
-                                  </li>
-                                  <form action="/logout" method="GET">
-                                    <li  class="pl-20" ><input type="submit" value="Đăng Xuất"></li>
-                                  </form>
-                              </ul>
+                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                        {{#if mess}}
+                                            <li><a href="#"><span class="fa fa-user author-log-ic"></span>Thông Tin Của Tôi</a>
+                                            </li>
+                                            <form action="/logout" method="GET">
+                                                <li  class="pl-20" ><input type="submit" value="Đăng Xuất"></li>
+                                            </form>
+                                        {{else}}
+                                            <li><a href="register"><span class="fa fa-home author-log-ic"></span>Đăng Kí</a>
+                                            </li>
+                                            <li><a href="login"><span class="fa fa-lock author-log-ic"></span>Đăng Nhập</a>
+                                            </li>
+                                        {{/if}}
+                                </ul>
                           </li>
                           <li class="nav-item nav-setting-open"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-tasks"></i></a>
 

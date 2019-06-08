@@ -12,7 +12,8 @@ router.get('/register', function(req, res, next){
 
 router.post('/register', function(req, res, next){
     req.checkBody('Username', 'tên người dùng').notEmpty();
-    req.checkBody('Password', 'mật khẩu').notEmpty().isLength({min: 10, max: 20});
+    req.checkBody('Password', 'mật khẩu').isLength({min: 5, max: 20});
+    req.checkBody('ConfirmPass', 'mật khẩu xác nhận').isLength({min: 5, max: 20});
     req.checkBody('Email', 'email').isEmail();
     let errors = req.validationErrors();
     
@@ -38,23 +39,29 @@ router.post('/register', function(req, res, next){
                         res.render('register', {title: 'Đăng Kí', layout: "", 'mess': "Tên người dùng đã tồn tại"});
                     }
                     else{
-                        req.body.Password = bcrypt.hashSync(req.body.Password, 10);
-                        const acc = new account(req.body);
-                        collectionAccountAdmin.insertOne(acc, function(err, res){
+                        if(req.body.Password == req.body.ConfirmPass){
+                            req.body.Password = bcrypt.hashSync(req.body.Password, 10);
+                            const acc = new account(req.body);
+                            collectionAccountAdmin.insertOne(acc, function(err, res){
+                                client.close();
+                                if(err){
+                                    return next(err);
+                                }
+                                else{
+                                    console.log("Account admin is added ");
+                                }
+                            });
+                            req.login(acc, function(err){
+                                if(err){
+                                    return next(err);
+                                }
+                                return res.render('index' , {title: "Trang Chủ", 'mess': req.user.Username}); 
+                            })
+                        }
+                        else{
                             client.close();
-                            if(err){
-                                return next(err);
-                            }
-                            else{
-                                console.log("Account admin is added ");
-                            }
-                        });
-                        req.login(acc, function(err){
-                            if(err){
-                                return next(err);
-                            }
-                            return res.render('index' , {title: "Trang Chủ", 'mess': req.user.Username}); 
-                        })
+                            res.render('register', {title: 'Đăng Kí', layout: "", 'mess': "mật khẩu xác nhận trùng khớp"});
+                        }
                     }
                 }
                 Asycn_Await();
