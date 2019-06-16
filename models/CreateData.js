@@ -45,7 +45,7 @@ class Creater {
         return array
   }
 
-  createOrder(productArray, sum) {
+  createOrder(productArray, sum) { 
     var array = []
     names3.map(name => array.push(({
         Description: "Không",

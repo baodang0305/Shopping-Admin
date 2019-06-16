@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const MongoClient = require("mongodb").MongoClient;
 
 //require for Object of mongoose
-const Manufacturer = require('./models/manufacturer');
+//const Manufacturer = require('./models/manufacturer');
 
 const creater = require('./CreateData');
 
 //Connect and Create database to Mongodb Atlas
-const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.gcp.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrites=true&w=majority";
 // MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
 //   if(err){
 //     console.log(err);
@@ -39,14 +39,14 @@ MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
         let goodArray = []
         let sum = 0
         array.forEach(element => {
-          let amount = Math.floor(Math.random() * 10)
+          let amount = Math.floor(Math.random() * 10) 
           goodArray.push({
             id: element._id,
             amount: amount
           })
           sum += element.Cost*amount
         });
-        console.log(creater.createOrder(goodArray, sum))
+        console.log(creater.createOrder(goodArray, sum)) 
         collectionOrder.insert(creater.createOrder(goodArray, sum), function(err, res){
           console.log("order are created ")
         });
