@@ -111,15 +111,6 @@
                         </li>
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false">
-                              <i class="fa big-icon fa-bar-chart-o icon-wrap"></i>
-                              <span class="mini-click-non">Biểu Đồ</span>
-                            </a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Bar Charts" href="bar-charts.html"><i class="fa fa-line-chart sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Bar Charts</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false">
                               <i class="fa big-icon fa-table icon-wrap"></i>
                               <span class="mini-click-non">QL Người Dùng</span>
                             </a>
@@ -132,7 +123,6 @@
             </div>
         </nav>
     </div>
-
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
       <div class="container-fluid">
@@ -251,12 +241,12 @@
                           <li class="nav-item">
                             <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                               <i class="fa fa-user adminpro-user-rounded header-riht-inf" aria-hidden="true"></i>
-                              <span class="admin-name">{{mess}}</span>
+                              <span class="admin-name">{{user.Username}}</span>
                               <i class="fa fa-angle-down adminpro-icon adminpro-down-arrow"></i>
                             </a>
                                 <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                        {{#if mess}}
-                                            <li><a href="#"><span class="fa fa-user author-log-ic"></span>Thông Tin Của Tôi</a>
+                                        {{#if user}}
+                                            <li><a href="#"><span class="fa fa-user author-log-ic"></span>{{user.Username}}</a>
                                             </li>
                                             <form action="/logout" method="GET">
                                                 <li  class="pl-20" ><input type="submit" value="Đăng Xuất"></li>

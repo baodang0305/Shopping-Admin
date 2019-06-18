@@ -7,10 +7,12 @@
                     <table>
                         <tr>
                             <th>Tên người nhận</th>
-                            <th>Địa chỉ người nhận</th>
-                            <th>Số điện thoại người nhận</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
                             <th>Ngày đặt</th>
                             <th>Tổng giá tiền</th>
+                            <th>Tình trạng giao hàng</th>
+                            <th></th>
                         </tr>
                         {{#each listOrder}}
                         <tr>
@@ -19,8 +21,13 @@
                             <td>{{this.ReceiverPhonenumber}}</td>
                             <td>{{this.OrderDate}}</td>
                             <td>{{this.Sum}}</td>
+                            {{#ifequal this.DeliveryStatus}}
+                                <td>Chưa giao</td>
+                            {{else}}
+                                <td>{{this.DeliveryStatus}}</td>
+                            {{/ifequal}}
                             <td>
-                                <a href="/order-edit-{{this._id}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                <a href="/order-detail-{{this._id}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                 <form action="/order-trash-{{this._id}}" method="POST">
                                     <button type="submit" data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </form>

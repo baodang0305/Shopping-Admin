@@ -34,6 +34,10 @@ const orderSchema = new Schema({
     Description:  {
       type: String,
       required: true
+    },
+    DeliveryStatus:{
+      type: String,
+      required: true
     }
 });
 

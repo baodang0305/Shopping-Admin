@@ -14,7 +14,7 @@ router.get('/category-list', function(req, res, next){
       let Async_Await = async()=>{
         let category_list = await collectionCategory.find({}).toArray();
         client.close();
-        res.render('category-list', {title: 'Category List', 'category_list': category_list});
+        res.render('category-list', {title: 'Category List', 'category_list': category_list, 'user': req.user});
       }
       Async_Await();
     }

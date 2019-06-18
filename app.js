@@ -1,61 +1,16 @@
 const express = require('express');
 const createError = require('http-errors');
 const path = require('path');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
-const session = require('express-session');
+const hbs = require('hbs');
 const passport = require('passport');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const validator = require('express-validator');
-const localStrategy = require('passport-local').Strategy;
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrites=true&w=majority";
+require('./config/passport')(passport);
+var app = express();
 
-passport.use(new localStrategy(function(Username, Password, done){
-      MongoClient.connect(uri, {useNewUrlParser: true}, function(err, client){
-          if(err){
-              return done(err);
-          }
-          else{
-              const collectionAccountAdmin = client.db('shoppingdb').collection('Account-Admin');
-                collectionAccountAdmin.findOne({Username: Username}, function(err, user){
-                  client.close();
-                  if(err){
-                    return done(err);
-                  }
-                  else{
-                    if(!user){
-                      return done(null, false, {message: "Incorrect Username"});
-                    }
-                    if(!bcrypt.compareSync(Password, user.Password)){
-                      return done(null, false, {message: "Incorrect Password"});
-                    }
-                    return done(null, user)
-                  }
-                });
-          }
-      });
-}));
-
-passport.serializeUser(function(user, done){
-  done(null, user.Username);
-});
-
-passport.deserializeUser(function(Username, done) {
-  MongoClient.connect(uri, {useNewUrlParser: true}, function(err, client){
-    if(err){
-        return done(err);
-    }
-    else{
-      const collectionAccountAdmin = client.db('shoppingdb').collection('Account-Admin');
-      collectionAccountAdmin.findOne({Username: Username}, function(err, user){
-        client.close();
-        if(err){
-          return done(err);
-        }
-        done(err, user);
-      });
-    }
-  });
+hbs.registerHelper('ifequal', function(value1, options) {
+  return (value1 == null) ? options.fn(this) : options.inverse(this);
 });
 
 var indexRouter = require('./controllers/index');
@@ -71,8 +26,6 @@ var registerRouter = require('./controllers/admin/register');
 var accountListRouter = require('./controllers/customer/account_list');
 var accountDetailRouter = require('./controllers/customer/account_detail');
 var loginRouter = require('./controllers/admin/login');
-
-var app = express();
 
 // view engine setup
 app.set('views', [

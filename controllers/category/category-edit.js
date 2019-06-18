@@ -17,7 +17,7 @@ router.get('/category-edit-:id', function(req,res, next){
       let Async_Await = async()=>{
         let categoryid = await collectionCategory.findOne({_id: object_id});
         client.close();
-        res.render('category-edit', {title: 'Category Edit', 'categoryid': categoryid});
+        res.render('category-edit', {title: 'Category Edit', 'categoryid': categoryid, 'user': req.user});
       }
       Async_Await();
     }

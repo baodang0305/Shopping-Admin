@@ -4,127 +4,96 @@ var ObjectId = require("mongodb").ObjectID;
 const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrites=true&w=majority";
 
-router.get('/manufacturer-edit-:id', function(req, res, next) {
-  var id = req.params.id
-  var object_id = new ObjectId(id);
 
-  res.render('manufacturer-edit', {title: 'Chình sửa thông tin nhà cung ứng', object_id: object_id, create: false});
-});
-
-router.post('/commit:id', function(req, res, next){
-  var name = req.body.name;
-  var address = req.body.address;
-  var phone = req.body.phone;
-  var des = req.body.des;
-
-  var id = req.params.id
-  if (id != null) {
-    var object_id = new ObjectId(id);
-    MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
-      if(err){
-        console.log(err);
-      }
-      else{
-        const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
-        let Async_Await = async()=>{
-          await collectionManufacturer.save({ Name: name, Address: address, PhoneNumber: phone, Description: des})
-          await collectionManufacturer.remove({_id: object_id});
-          client.close();
-          // let listManufacturer = await collectionManufacturer.find().toArray();
-          // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-          res.redirect("/manufacturer-list")
-        }
-        Async_Await();
-      }
-    });
-  } else {
-    MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
-      if(err){
-        console.log(err);
-      }
-      else{
-        const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
-        let Async_Await = async()=>{
-          await collectionManufacturer.save({ Name: name, Address: address, PhoneNumber: phone, Description: des})
-          client.close();
-          // let listManufacturer = await collectionManufacturer.find().toArray();
-          // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-          res.redirect("/manufacturer-list")
-        }
-        Async_Await();
-      }
-    });
-  }
-});
-
-router.post('/commit', function(req, res, next){
-  var name = req.body.name;
-  var address = req.body.address;
-  var phone = req.body.phone;
-  var des = req.body.des;
-  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
+router.get('/manufacturer-list', function(req, res, next) {
+  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, DB) {
     if(err){
       console.log(err);
     }
     else{
-      const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
+      const collectionManufacturer = DB.db("shoppingdb").collection("Manufacturer");
       let Async_Await = async()=>{
-        await collectionManufacturer.save({ Name: name, Address: address, PhoneNumber: phone, Description: des})
-        client.close();
-        // let listManufacturer = await collectionManufacturer.find().toArray();
-        // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-        res.redirect("/manufacturer-list")
+          let listManufacturer = await collectionManufacturer.find().toArray();
+          DB.close();
+          res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', 'listManufacturer': listManufacturer, 'user': req.user});
       }
       Async_Await();
     }
   });
 });
 
-router.get('/manufacturer-create', function(req, res, next){
-  res.render('manufacturer-edit', {title: 'Thêm nhà cung ứng', create: true});
+router.get('/manufacturer-add', function(req,res){
+  res.render('manufacturer-add', {title: "Thêm nhà sản xuất", 'user': req.user});
+})
+
+router.get('/manufacturer-detail-:id', function(req, res, next) {
+  var id = req.params.id
+  var object_id = new ObjectId(id);
+  MongoClient.connect(uri, {useNewUrlParser: true}, function(err, DB){
+    if(err) console.log(err);
+    else{
+      const manufacturerCollection = DB.db('shoppingdb').collection('Manufacturer');
+      let Async_Await = async() =>{
+        let manufacturer = await manufacturerCollection.findOne({_id: object_id});
+        res.render('manufacturer-edit', {title: 'Cập nhật nhà cung cấp', 'manufacturer': manufacturer, 'user': req.user});
+      }
+      Async_Await();
+    }
+  })
 });
+
+router.post('/edit-manufacturer-:id', function(req, res){
+  var name = req.body.Name;
+  var address = req.body.Address;
+  var phone = req.body.Phonenumber;
+  var des = req.body.Description;
+  var id = req.params.id
+
+  var object_id = new ObjectId(id);
+  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, DB) {
+    if(err){
+      console.log(err);
+    }
+    else{
+      const collectionManufacturer = DB.db("shoppingdb").collection("Manufacturer");
+      collectionManufacturer.updateOne({_id: object_id}, {$set:{ Name: name, Address: address, PhoneNumber: phone, Description: des}});
+      DB.close();
+      res.redirect("/manufacturer-list")
+    }
+  })
+});
+
+router.post('/add-manufacturer', function(req, res){
+  var name = req.body.name;
+  var address = req.body.address;
+  var phone = req.body.phone;
+  var des = req.body.des;
+  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, DB) {
+    if(err){
+      console.log(err);
+    }
+    else{
+      const collectionManufacturer = DB.db("shoppingdb").collection("Manufacturer");
+        collectionManufacturer.insertOne({ Name: name, Address: address, PhoneNumber: phone, Description: des})
+        DB.close();
+        res.redirect("/manufacturer-list")
+    }
+  })
+})
 
 router.post('/manufacturer-trash-:id', function(req, res, next) {
   var id = req.params.id;
   var object_id = new ObjectId(id);
 
-  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
+  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, DB) {
     if(err){
       console.log(err);
     }
     else{
-      const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
-      let Async_Await = async()=>{
-        await collectionManufacturer.remove({_id: object_id});
-        client.close();
-        // let listManufacturer = await collectionManufacturer.find().toArray();
-        // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-        res.redirect("/manufacturer-list")
-      }
-      Async_Await();
-    }
-  });
-});
-
-router.get('/manufacturer-list', function(req, res, next) {
-  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
-    if(err){
-      console.log(err);
-    }
-    else{
-      console.log("Successfully connected");
-      const collectionManufacturer = client.db("shoppingdb").collection("Manufacturer");
-      let Async_Await = async()=>{
-        try {
-          let listManufacturer = await collectionManufacturer.find().toArray();
-          client.close();
-          res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-        } catch (err) {
-          res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: []});
-          alert(err)
-        }
-      }
-      Async_Await();
+      const collectionManufacturer = DB.db("shoppingdb").collection("Manufacturer");
+      collectionManufacturer.deleteOne({_id: object_id});
+      DB.close();
+      res.redirect("/manufacturer-list")
     }
   });
 });

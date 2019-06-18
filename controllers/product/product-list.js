@@ -14,7 +14,7 @@ router.get('/product-list', function(req, res, next){
       let Async_Await = async()=>{
         let product_list = await collectionProduct.find({}).toArray();
         client.close();
-        res.render('product-list', {title: 'Product List', 'product_list': product_list});
+        res.render('product-list', {title: 'Product List', 'product_list': product_list, 'user': req.user});
       }
       Async_Await();
     }

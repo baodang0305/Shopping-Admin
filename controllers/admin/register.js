@@ -18,11 +18,11 @@ router.post('/register', function(req, res, next){
     let errors = req.validationErrors();
     
     if(errors){
-        var mess;
-        for(var i = 0; i<errors.length; i++){
-            mess = mess + ", " + errors[i].msg;
+        var mess = "";
+        for(var i = 0; i<errors.length - 1; i++){
+            mess = mess + errors[i].msg + ", ";
         }
-        mess = mess + " không hợp lệ!";
+        mess = mess + errors[errors.length - 1].msg + " không hợp lệ!";
         res.render('register', {title: 'Đăng Kí', layout: "", 'mess': mess});
     }
     else{
@@ -55,7 +55,7 @@ router.post('/register', function(req, res, next){
                                 if(err){
                                     return next(err);
                                 }
-                                return res.render('index' , {title: "Trang Chủ", 'mess': req.user.Username}); 
+                                return res.render('index' , {title: "Trang Chủ", 'user': req.user}); 
                             })
                         }
                         else{

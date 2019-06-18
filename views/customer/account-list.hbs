@@ -4,23 +4,25 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap">
                     <h4>Danh Sách Tài Khoản Người Dùng</h4>
-                    <div class="add-product">
-                        <a href="category-add">Thêm Tài Khoản</a>
-                    </div>
                     <table>
                         <tr>
                             <th>Username</th>
-                            <th>Password</th>
-                            <th>Email Address</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>PhoneNumber</th>
+                            <th></th>
                         </tr>
                         {{#each account_list}}
                         <tr>
                             <td>{{this.Username}}</td>
-                            <td>{{this.Password}}</td>
+                            <td>{{this.Name}}</td>
                             <td>{{this.Email}}</td>
+                            <td>{{this.Address}}</td>
+                            <td>{{this.Phonenumber}}</td>
                             <td>
                                 <a href="account-detail-{{this._id}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                <form action="" method="POST">
+                                <form action="account-delete-{{this._id}}" method="POST">
                                     <button type="submit" data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                 </form>
                             </td>

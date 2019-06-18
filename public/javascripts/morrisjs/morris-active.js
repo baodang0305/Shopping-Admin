@@ -1,60 +1,56 @@
-// Dashboard 1 Morris-chart
-
+// Dashboard 1 Morris-char
 Morris.Area({
         element: 'morris-area-chart',
-        data: [{
-            period: '2012',
-            Bags: 0,
-            Shoes: 0,
-            Jewelery: 0
-        }, {
-            period: '2013',
-            Bags: 130,
-            Shoes: 100,
-            Jewelery: 80
-        }, {
-            period: '2014',
-            Bags: 80,
-            Shoes: 60,
-            Jewelery: 70
-        }, {
-            period: '2015',
-            Bags: 70,
-            Shoes: 200,
-            Jewelery: 160
-        }, {
-            period: '2016',
-            Bags: 180,
-            Shoes: 150,
-            Jewelery: 120
-        }, {
-            period: '2017',
-            Bags: 105,
-            Shoes: 100,
-            Jewelery: 90
-        },
-         {
-            period: '2018',
-            Bags: 250,
-            Shoes: 150,
-            Jewelery: 200
-        }],
+        data: [
+            {   
+                period: '2013',
+                Total: document.getElementById('total13').innerHTML,
+            }, {
+                period: '2014',
+                Total: document.getElementById('total14').innerHTML,
+                
+            }, {
+                period: '2015',
+                Total: document.getElementById('total15').innerHTML,
+            
+            }, {
+                period: '2016',
+                Total: document.getElementById('total16').innerHTML,
+                
+            }, {
+                period: '2017',
+                Total: document.getElementById('total17').innerHTML,
+            
+            },{
+                period: '2018',
+                Total: document.getElementById('total18').innerHTML,
+            
+            }, {
+                period: '2019',
+                Total: document.getElementById('total19').innerHTML,
+            
+            }, {
+                period: '2020',
+                Total: document.getElementById('total20').innerHTML,
+            
+            } 
+        ],
         xkey: 'period',
-        ykeys: ['Bags', 'Shoes', 'Jewelery'],
-        labels: ['Bags', 'Shoes', 'Jewelery'],
+        ykeys: ['Total'],
+        labels: ['Total'],
         pointSize: 0,
         fillOpacity: 0.6,
-        pointStrokeColors:['#f75b36', '#00b5c2 ', '#008efa'],
+        pointStrokeColors:['#00b5c2'],
         behaveLikeLine: true,
         gridLineColor: '#e0e0e0',
         lineWidth:0,
         hideHover: 'auto',
-        lineColors: ['#f75b36', '#00b5c2 ', '#008efa'],
+        lineColors: ['#00b5c2'],
         resize: true
         
     });
 
-Morris.Area({
+    Morris.Area({
         element: 'extra-area-chart',
         data: [{
                     period: '2012',

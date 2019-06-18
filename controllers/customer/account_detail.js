@@ -17,15 +17,11 @@ router.get('/account-detail-:id', function(req,res, next){
       let Async_Await = async()=>{
         let customerid = await collectionCustomer.findOne({_id: object_id});
         client.close();
-        res.render('account-detail', {title: 'Account Detail', 'customerid': customerid});
+        res.render('account-detail', {title: 'Account Detail', 'customerid': customerid, 'user': req.user});
       }
       Async_Await();
     }
   });
-});
-
-router.post('/account-list', function(req, res){
-  res.redirect('account-list');
 });
 
 module.exports = router;

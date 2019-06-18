@@ -21,14 +21,22 @@
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                                     <input type="text" class="form-control" placeholder="Tên sản phẩm" name="Name">
+                                                    
                                                 </div>
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Thể loại" name="Category">
+                                                    <select class="form-control" name="Category">
+                                                        <option value="Shirt">Shirt</option>
+                                                        <option value="Tshirt">Tshirt</option>
+                                                        <option value="Sport">Sport</option>
+                                                    </select>
                                                 </div>
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-venus-mars" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Giới tính" name="Gender">
+                                                    <select class="form-control" name="Gender">
+                                                        <option value="Nam">Nam</option>
+                                                        <option value="Nữ">Nữ</option>
+                                                    </select>
                                                 </div>
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -48,7 +56,11 @@
                                                 </div>
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-ticket" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Nhóm sản phẩm" name="Product_Group">
+                                                    <select class="form-control" name="Product_Group">
+                                                        <option value="Popular">Popular</option>
+                                                        <option value="Feature">Feature</option>
+                                                        <option value="New">New</option>
+                                                    </select>
                                                 </div>
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -62,8 +74,8 @@
                                             <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
                                                 <input type="submit" value="Lưu Thông Tin" class="btn btn-primary waves-effect waves-light m-r-10">
 
-                                                <button type="button" class="btn btn-warning waves-effect waves-light">Discard
-                                                    </button>
+                                                <a href="/product-list" class="btn btn-warning waves-effect waves-light">Hủy
+                                                    </a>
                                             </div>
                                         </div>
                                     </div>

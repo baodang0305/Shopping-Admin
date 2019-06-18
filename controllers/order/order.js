@@ -10,56 +10,62 @@ router.get('/order-list', function(req, res, next) {
       console.log(err);
     }
     else{
-      console.log("Successfully connected");
       const collectionOrder = client.db("shoppingdb").collection("Order");
       let Async_Await = async()=>{
-        try {
           let listOrder = await collectionOrder.find().toArray();
           client.close();
-          res.render('order-list', {title: 'Danh sách đơn đặt hàng', listOrder: listOrder});
-        } catch (err) {
-          res.render('order-list', {title: 'Danh sách đơn đặt hàng', listOrder: []});
-          alert(err)
-        }
+          res.render('order-list', {title: 'Danh sách đơn đặt hàng', listOrder: listOrder, 'user': req.user});
+      }
+      Async_Await();
+    }
+  })
+});
+let object_id;
+router.get('/order-detail-:id', function(req, res) {
+  var id = req.params.id;
+  object_id = new ObjectId(id);
+  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
+    if(err){
+      console.log(err);
+    }
+    else{
+      const collectionOrder = client.db("shoppingdb").collection("Order");
+      let Async_Await = async()=>{
+        let order = await collectionOrder.findOne({_id: object_id});
+        let arrProduct = order.Products;
+        res.render('order-edit', {title: 'Đơn đặt hàng chi tiết', 'order': order, 'arrProduct': arrProduct, 'user': req.user});
       }
       Async_Await();
     }
   });
 });
 
-router.post('/order-commit:id', function(req, res, next){
-  var name = req.body.name;
-  var address = req.body.address;
-  var phone = req.body.phone;
-  var des = req.body.des;
-
-  var id = req.params.id
-  if (id != null) {
-    var object_id = new ObjectId(id);
-    MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
-      if(err){
-        console.log(err);
+router.post('/order-edit', function(req, res){
+  var name = req.body.ReceiverName;
+  var address = req.body.ReceiverAddress;
+  var phone = req.body.ReceiverPhonenumber;
+  var deliveryStatus = req.body.DeliveryStatus;
+  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
+    if(err){
+      console.log(err);
+    }
+    else{
+      const collectionOrder = client.db("shoppingdb").collection("Order");
+      let Async_Await = async()=>{
+        await collectionOrder.findOneAndUpdate(
+          {_id: object_id},
+          { $set: {
+            "ReceiverName": name,
+            "ReceiverAddress": address,
+            "ReceiverPhonenumber": phone,
+            "DeliveryStatus": deliveryStatus
+        }})
+        client.close();
+        res.redirect("/order-list")
       }
-      else{
-        const collectionOrder = client.db("shoppingdb").collection("Order");
-        let Async_Await = async()=>{
-          await collectionOrder.findOneAndUpdate(
-            {_id: object_id},
-            { $set: {
-              "ReceiverName": name,
-              "ReceiverAddress": address,
-              "ReceiverPhonenumber": phone,
-              "Description": des
-          }})
-          client.close();
-          // let listManufacturer = await collectionManufacturer.find().toArray();
-          // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-          res.redirect("/order-list")
-        }
-        Async_Await();
-      }
-    });
-  }
+      Async_Await();
+    }
+  });
 });
 
 router.post('/order-trash-:id', function(req, res, next) {
@@ -75,69 +81,9 @@ router.post('/order-trash-:id', function(req, res, next) {
       let Async_Await = async()=>{
         await collectionOrder.remove({_id: object_id});
         client.close();
-        // let listManufacturer = await collectionManufacturer.find().toArray();
-        // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
         res.redirect("/order-list")
       }
       Async_Await();
-    }
-  });
-});
-
-router.post('/good-trash-:id', function(req, res, next) {
-  var id = req.params.id;
-  var object_id = new ObjectId(id);
-
-  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
-    if(err){
-      console.log(err);
-    }
-    else{
-      const collectionOrder = client.db("shoppingdb").collection("Order");
-      let Async_Await = async()=>{
-        await collectionOrder.remove({_id: object_id});
-        client.close();
-        // let listManufacturer = await collectionManufacturer.find().toArray();
-        // res.render('manufacturer-list', {title: 'Danh sách nhà cung ứng', listManufacturer: listManufacturer});
-        res.redirect("/order-list")
-      }
-      Async_Await();
-    }
-  });
-});
-
-router.get('/order-edit-:id', function(req, res, next) {
-  var id = req.params.id;
-  var object_id = new ObjectId(id);
-  console.log(object_id)
-
-  MongoClient.connect(uri,{ useNewUrlParser: true }, function(err, client) {
-    if(err){
-      console.log(err);
-    }
-    else{
-      const collectionOrder = client.db("shoppingdb").collection("Order");
-      const collectionProduct = client.db("shoppingdb").collection("Product");
-      let order = collectionOrder.find({ _id: object_id}).sort().toArray().then(orderList => {
-        let products = []
-        let productNumber = orderList[0].Products.length
-        let flag = 0
-        orderList[0].Products.forEach(element => {
-            let product = collectionProduct.find({_id: element.id}).sort().toArray().then(items => {
-              client.close();
-              console.log(items)
-              products.push({
-                product: items[0],
-                amount: element.amount
-              })
-              flag ++
-              if (flag === productNumber) {
-                console.log(products)
-                res.render('order-edit', {title: 'Chi tiết đơn đặt hàng', listProduct: products, object_id: object_id})
-              }
-            }).catch(err => console.error(`Failed to find documents: ${err}`))
-        })
-      });
     }
   });
 });

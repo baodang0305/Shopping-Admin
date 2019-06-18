@@ -17,7 +17,7 @@
                                             <div class="review-content-section">
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{categoryid._id}}" name="Id">
+                                                    <input type="text" class="form-control" placeholder="{{categoryid._id}}" readonly name="Id">
                                                 </div>
                                             </div>
                                         </div>
@@ -25,7 +25,7 @@
                                             <div class="review-content-section">
                                                 <div class="input-group mg-b-pro-edt">
                                                     <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="{{categoryid.Name}}" name="Name">
+                                                    <input type="text" class="form-control" value="{{categoryid.Name}}" name="Name">
                                                 </div>
                                             </div>
                                         </div>
@@ -35,8 +35,8 @@
                                             <div class="text-center mg-b-pro-edt custom-pro-edt-ds">
                                                 <input type="submit" value="Lưu Thông Tin" class="btn btn-primary waves-effect waves-light m-r-10">
                                                     
-                                                <button type="button" class="btn btn-warning waves-effect waves-light">Discard
-                                                    </button>
+                                                <a href="category-list" class="btn btn-warning waves-effect waves-light">Quay Lại
+                                                    </a>
                                             </div>
                                         </div>
                                     </div>

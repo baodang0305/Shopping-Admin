@@ -17,7 +17,7 @@ router.get('/product-edit-:id', function(req,res, next){
       let Async_Await = async()=>{
         let productid = await collectionProduct.findOne({_id: object_id});
         client.close();
-        res.render('product-edit', {title: 'Product Edit', 'productid': productid});
+        res.render('product-edit', {title: 'Product Edit', 'productid': productid, 'user': req.user});
       }
       Async_Await();
     }

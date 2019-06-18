@@ -5,7 +5,7 @@ const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrit
 const category = require("../../models/category");
 
 router.get('/category-add', function(req,res, next){
-  res.render('category-add', {title: 'Category Add'});
+  res.render('category-add', {title: 'Category Add', 'user': req.user});
 });
 
 router.post('/add_category', function(req, res, next){

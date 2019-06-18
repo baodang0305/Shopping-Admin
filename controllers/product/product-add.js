@@ -4,12 +4,6 @@ const path = require('path');
 const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://admin:admin@cluster0-tuy0h.mongodb.net/test?retryWrites=true&w=majority";
 var multer = require("multer");
-// const handleError = (err, res) => {
-//   res
-//     .status(500)
-//     .contentType("text/plain")
-//     .end("Lỗi!");
-// };
 
 const storage = multer.diskStorage({
   destination: './public/images/product',
@@ -21,7 +15,7 @@ const storage = multer.diskStorage({
 var upload = multer({storage: storage}).single('Image');
 
 router.get('/product-add', function(req,res, next){
-  res.render('product-add', {title: 'Product Add'});
+  res.render('product-add', {title: 'Product Add', 'user': req.user});
 });
 
 router.post('/add_product', upload, function(req, res, next){
